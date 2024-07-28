@@ -177,11 +177,11 @@ app.get('/', async (req, res) => {
 
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
-                console.error(error);
+                console.error("Error at executing payment",error);
                 return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
 
             } else {
-                console.log("Execute Payment Response");
+                console.log("Execute Payment Response:", payment);
                 // console.log(payment);
                 const response = JSON.stringify(payment);
                 const parsedResponse = JSON.parse(response);
