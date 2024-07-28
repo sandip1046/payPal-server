@@ -75,7 +75,7 @@ app.get('/payment', async (req, res) => {
 
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
-                alert("error");
+                console.error("error");
                 return res.status(500).json({ message: "Payment failed" });
 
             } else {
@@ -133,7 +133,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
-                alert("error");
+                console.error("error");
                 return res.status(500).json({ message: "Payment failed" });
 
             } else {
@@ -156,10 +156,9 @@ app.post('/paymentCoupon', async (req, res) => {
 app.get('/', async (req, res) => {
 
     try {
-
-        const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
-
+        const token = req.query.token;
+        const payerId = req.query.PayerID;
         if (!payerId || !paymentId) {
             // Check if query params are missing
             console.error("Missing query parameters", { payerId, paymentId });
@@ -179,7 +178,7 @@ app.get('/', async (req, res) => {
 
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
-                alert(error);
+                console.error(error);
                 return res.status(500).json({ success: false, message: "Payment failed" }); //this will send success: false to the FE.
 
             } else {
@@ -192,7 +191,7 @@ app.get('/', async (req, res) => {
 
                 console.log("transactions", transactions);
 
-                alert("Payment Successfull!")
+                console.error("Payment Successfull!")
 
                 return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
 
