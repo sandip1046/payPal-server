@@ -147,7 +147,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
 
     } catch (error) {
-        console.log("Try Block error"error);
+        console.log("Try Block error",error);
     }
 })
 
