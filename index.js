@@ -160,7 +160,7 @@ app.get('/', async (req, res) => {
 
         if (!PayerID || !paymentId) {
             // Check if query params are missing
-            console.error("Missing query parameters", { PayerID, paymentId });
+            alert("Missing query parameters", { PayerID, paymentId });
             return res.status(400).json({ success: false, message: "Missing query parameters" });
         }
 
