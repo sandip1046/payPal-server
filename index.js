@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const paypal = require('paypal-rest-sdk');
 const cors = require('cors');
@@ -12,8 +13,8 @@ app.use(cors());
 // PayPal configuration
 paypal.configure({
     'mode': 'sandbox', //sandbox
-    'client_id': 'ARk3rK-7NlfgiS8zJrNPAe4lvQgfczBDYujOPwLY1f9qGNRIPUmBBQBICZ8R_c4nXaBvTi059vBvfnZj',
-    'client_secret': 'EBMGdaVshNZvfateqvnpMMf3TOPHOwCVSQ3-IbN7kvq75tA8jV1hX-ziWOd6gdHeoS2j72iIS_JPALNh'
+    'client_id': process.env.PAYPAL_CLIENT_ID,
+    'client_secret': process.env.PAYPAL_CLIENT_SECRET
 });
 
 // Defining routes
