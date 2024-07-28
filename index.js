@@ -89,8 +89,8 @@ app.post('/paymentCoupon', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://edtech-sandip.netlify.app/success",
-                "cancel_url": "https://edtech-sandip.netlify.app"
+                "return_url": "https://pay-pal-server-lksquf818-sandip-kumar-yadavs-projects.vercel.app/success",
+                "cancel_url": "https://pay-pal-server-lksquf818-sandip-kumar-yadavs-projects.vercel.app/"
             },
             "transactions": [{
                 "item_list": {
