@@ -8,7 +8,7 @@ const app = express();
 const router = express.Router();
 app.use(express.json());
 
-app.use(cors());
+app.use(cors( { origin: 'https://sandip-ed-tech.vercel.app/' }));
 
 // PayPal configuration
 paypal.configure({
