@@ -51,8 +51,8 @@ app.get('/payment', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/success",
-                "cancel_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/"
+                "return_url": "https://pay-pal-server.vercel.app/success",
+                "cancel_url": "https://pay-pal-server.vercel.app/"
             },
             "transactions": [{
                 "item_list": {
@@ -109,8 +109,8 @@ app.post('/paymentCoupon', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/success",
-                "cancel_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/"
+                "return_url": "https://pay-pal-server.vercel.app/success",
+                "cancel_url": "https://pay-pal-server.vercel.app/"
             },
             "transactions": [{
                 "item_list": {
