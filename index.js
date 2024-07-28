@@ -147,7 +147,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        console.log("Try Block error"error);
     }
 })
 
@@ -157,8 +157,14 @@ app.get('/success', async (req, res) => {
 
     try {
 
-        const payerId = req.query.payerId;
+        const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
+
+        if (!payerId || !paymentId) {
+            // Check if query params are missing
+            console.error("Missing query parameters", { payerId, paymentId });
+            return res.status(400).json({ success: false, message: "Missing query parameters" });
+        }
 
         const execute_payment_json = {
             "payer_id": payerId,
@@ -195,7 +201,7 @@ app.get('/success', async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        console.log("Error in succes endpoint",error);
     }
 
 })
