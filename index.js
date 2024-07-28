@@ -156,7 +156,8 @@ app.post('/paymentCoupon', async (req, res) => {
 app.get('/', async (req, res) => {
 
     try {
-        const { paymentId, token, PayerID } = req.query;
+       const PayerID = req.query.PayerID;
+       const paymentId = req.query.paymentId;
 
         if (!PayerID || !paymentId) {
             // Check if query params are missing
