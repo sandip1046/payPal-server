@@ -156,17 +156,16 @@ app.post('/paymentCoupon', async (req, res) => {
 app.get('/', async (req, res) => {
 
     try {
-        const paymentId = req.query.paymentId;
-        const token = req.query.token;
-        const payerId = req.query.PayerID;
-        if (!payerId || !paymentId) {
+        const { paymentId, token, PayerID } = req.query;
+
+        if (!PayerID || !paymentId) {
             // Check if query params are missing
-            console.error("Missing query parameters", { payerId, paymentId });
+            console.error("Missing query parameters", { PayerID, paymentId });
             return res.status(400).json({ success: false, message: "Missing query parameters" });
         }
 
         const execute_payment_json = {
-            "payer_id": payerId,
+            "payer_id": PayerID,
             "transactions": [{
                 "amount": {
                     "currency": "USD",
