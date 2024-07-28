@@ -39,7 +39,7 @@ paypal.configure({
 // Defining routes
 
 
-router.get('/payment', async (req, res) => {
+app.get('/payment', async (req, res) => {
 
 
     let data
@@ -92,7 +92,7 @@ router.get('/payment', async (req, res) => {
         console.log(error);
     }
 })
-router.post('/paymentCoupon', async (req, res) => {
+app.post('/paymentCoupon', async (req, res) => {
     const { price } = req.body; //EXTRACTING PRICE FROM THE BODY OF THE REQUEST INORDER GET THE PRICE OF THE COURSE AFTER APPLYING THE COUPON
 
     //IF INVALID PRICE IS GIVEN BY THE USER
@@ -153,7 +153,7 @@ router.post('/paymentCoupon', async (req, res) => {
 
 
 
-router.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
 
     try {
 
@@ -201,7 +201,7 @@ router.get('/', async (req, res) => {
 })
 
 
-router.get('/failed', async (req, res) => {
+app.get('/failed', async (req, res) => {
 
     return res.status(500).json({ message: "Payment failed" });
 
