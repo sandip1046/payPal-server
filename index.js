@@ -51,8 +51,8 @@ app.get('/payment', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server.vercel.app/success",
-                "cancel_url": "https://pay-pal-server.vercel.app/"
+                "return_url": "https://pay-pal-server.vercel.app/",
+                "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
                 "item_list": {
@@ -109,8 +109,8 @@ app.post('/paymentCoupon', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server.vercel.app/success",
-                "cancel_url": "https://pay-pal-server.vercel.app/"
+                "return_url": "https://pay-pal-server.vercel.app/",
+                "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
                 "item_list": {
@@ -153,7 +153,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
 
 
-app.get('/success', async (req, res) => {
+app.get('/', async (req, res) => {
 
     try {
 
