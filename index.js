@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // Pre-flight requests
 
 // Custom middleware for setting headers
-app.use((req, res, next) => {
+router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://sandip-ed-tech.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -39,7 +39,7 @@ paypal.configure({
 // Defining routes
 
 
-app.get('/payment', async (req, res) => {
+router.get('/payment', async (req, res) => {
 
 
     let data
@@ -92,7 +92,7 @@ app.get('/payment', async (req, res) => {
         console.log(error);
     }
 })
-app.post('/paymentCoupon', async (req, res) => {
+router.post('/paymentCoupon', async (req, res) => {
     const { price } = req.body; //EXTRACTING PRICE FROM THE BODY OF THE REQUEST INORDER GET THE PRICE OF THE COURSE AFTER APPLYING THE COUPON
 
     //IF INVALID PRICE IS GIVEN BY THE USER
@@ -153,7 +153,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
 
 
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
 
@@ -201,7 +201,7 @@ app.get('/', async (req, res) => {
 })
 
 
-app.get('/failed', async (req, res) => {
+router.get('/failed', async (req, res) => {
 
     return res.status(500).json({ message: "Payment failed" });
 
