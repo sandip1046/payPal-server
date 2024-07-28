@@ -11,7 +11,7 @@ app.use(express.json());
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://sandip-ed-tech.vercel.app/',
+    origin: 'https://sandip-ed-tech.vercel.app/payment',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204
@@ -22,7 +22,7 @@ app.options('*', cors(corsOptions)); // Pre-flight requests
 
 // Custom middleware for setting headers
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://sandip-ed-tech.vercel.app/');
+    res.header('Access-Control-Allow-Origin', 'https://sandip-ed-tech.vercel.app/payment');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
