@@ -6,27 +6,28 @@ const cors = require('cors');
 
 const app = express();
 const router = express.Router();
+
 app.use(express.json());
 
+// CORS configuration
 const corsOptions = {
-    origin: 'https://sandip-ed-tech.vercel.app',
+    origin: 'https://sandip-ed-tech.vercel.app/',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Pre-flight requests
 
-app.options('*', cors(corsOptions));
-
+// Custom middleware for setting headers
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://sandip-ed-tech.vercel.app');
+    res.header('Access-Control-Allow-Origin', 'https://sandip-ed-tech.vercel.app/');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
-  });
-
+});
 
 // PayPal configuration
 paypal.configure({
@@ -50,8 +51,8 @@ app.get('/payment', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://edtech-sandip.netlify.app/success",
-                "cancel_url": "https://edtech-sandip.netlify.app"
+                "return_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/success",
+                "cancel_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/"
             },
             "transactions": [{
                 "item_list": {
@@ -108,8 +109,8 @@ app.post('/paymentCoupon', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server-lksquf818-sandip-kumar-yadavs-projects.vercel.app/success",
-                "cancel_url": "https://pay-pal-server-lksquf818-sandip-kumar-yadavs-projects.vercel.app/"
+                "return_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/success",
+                "cancel_url": "https://pay-pal-server-m9zd9or6r-sandip-kumar-yadavs-projects.vercel.app/"
             },
             "transactions": [{
                 "item_list": {
