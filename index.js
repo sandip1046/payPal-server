@@ -178,7 +178,7 @@ app.get('/', async (req, res) => {
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
                 console.error(error);
-                return res.status(500).json({ success: false, message: "Payment failed" }); //this will send success: false to the FE.
+                return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
 
             } else {
                 console.log("Execute Payment Response");
@@ -207,7 +207,7 @@ app.get('/', async (req, res) => {
 
 app.get('/failed', async (req, res) => {
 
-    return res.status(500).json({ message: "Payment failed" });
+    return res.status(500).json({ message: "Payment failed and now redirected to failed endpoint" });
 
 })
 
