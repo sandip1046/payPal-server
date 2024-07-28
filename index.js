@@ -8,7 +8,17 @@ const app = express();
 const router = express.Router();
 app.use(express.json());
 
-app.use(cors( { origin: 'https://sandip-ed-tech.vercel.app/' }));
+const corsOptions = {
+    origin: 'https://sandip-ed-tech.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
+
 
 // PayPal configuration
 paypal.configure({
@@ -40,7 +50,7 @@ app.get('/payment', async (req, res) => {
                     "items": [{
                         "name": "item",
                         "sku": "item",
-                        "price":"30",
+                        "price": "30",
                         "currency": "USD",
                         "quantity": 1
                     }]
@@ -98,7 +108,7 @@ app.post('/paymentCoupon', async (req, res) => {
                     "items": [{
                         "name": "item",
                         "sku": "item",
-                        "price":price.toFixed(2),
+                        "price": price.toFixed(2),
                         "currency": "USD",
                         "quantity": 1
                     }]
