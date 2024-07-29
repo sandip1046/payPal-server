@@ -201,6 +201,7 @@ app.get('/success', async (req, res) => {
 
     } catch (error) {
         console.log("Error in succes endpoint",error);
+        return res.status(500).json({ message: "Payment failed and  Failed at try catch of /success" });
     }
 
 })
