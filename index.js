@@ -79,10 +79,11 @@ app.get('/payment', async (req, res) => {
                 return res.status(500).json({ message: "Payment failed" });
 
             } else {
-                console.log("Create Payment Response");
-                // console.log(payment);
-                data = payment;
-                res.json(data);
+                for (let i = 0; i < payment.links.length; i++) {
+                    if (payment.links[i].rel === 'approval_url') {
+                        res.redirect(payment.links[i].href);
+                    }
+                }
 
             }
         });
@@ -137,10 +138,11 @@ app.post('/paymentCoupon', async (req, res) => {
                 return res.status(500).json({ message: "Payment failed" });
 
             } else {
-                console.log("Create Payment Response");
-                // console.log(payment);
-                data = payment;
-                res.json(data);
+                for (let i = 0; i < payment.links.length; i++) {
+                    if (payment.links[i].rel === 'approval_url') {
+                        res.redirect(payment.links[i].href);
+                    }
+                }
 
             }
         });
@@ -183,17 +185,19 @@ app.get('/', async (req, res) => {
 
             } else {
                 console.log("Execute Payment Response:", payment);
-                // console.log(payment);
-                const response = JSON.stringify(payment);
-                const parsedResponse = JSON.parse(response);
+                return res.status(200).json({ success: true, message: "Payment successful!" });
+                // console.log("Execute Payment Response:", payment);
+                // // console.log(payment);
+                // const response = JSON.stringify(payment);
+                // const parsedResponse = JSON.parse(response);
 
-                const transactions = parsedResponse.transactions[0];
+                // const transactions = parsedResponse.transactions[0];
 
-                console.log("transactions", transactions);
+                // console.log("transactions", transactions);
 
-                console.error("Payment Successfull!")
+                // console.error("Payment Successfull!")
 
-                return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
+                // return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
 
             }
         })
