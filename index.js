@@ -154,59 +154,98 @@ app.post('/paymentCoupon', async (req, res) => {
 })
 
 
-
 app.get('/', async (req, res) => {
-
     try {
-       const PayerID = req.query.PayerID;
-       const paymentId = req.query.paymentId;
+      const PayerID = req.query.PayerID;
+      const paymentId = req.query.paymentId;
 
-        if (!PayerID || !paymentId) {
-            // Check if query params are missing
-            alert("Missing query parameters", { PayerID, paymentId });
-            return res.status(400).json({ success: false, message: "Missing query parameters" });
-        }
+      if (!PayerID || !paymentId) {
+        return res.status(400).json({ success: false, message: "Missing query parameters" });
+      }
 
-        const execute_payment_json = {
+      paypal.payment.get(paymentId, function (error, payment) {
+        if (error) {
+          console.error("Error at getting payment", error);
+          return res.status(500).json({ success: false, message: "Payment failed because error during Payment get" });
+        } else {
+          const transactions = payment.transactions[0];
+          const amount = transactions.amount;
+
+          const execute_payment_json = {
             "payer_id": PayerID,
             "transactions": [{
-                "amount": {
-                    "currency": "USD",
-                    "total": "1.00"
-                }
+              "amount": amount
             }]
-        }
+          };
 
-
-         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+          paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
-                console.error("Error at executing payment",error);
-                return res.status(500).json({ success: false, message: "Payment failed because error during Payment" }); //this will send success: false to the FE.
-
+              console.error("Error at executing payment", error);
+              return res.status(500).json({ success: false, message: "Payment failed because error during Payment execute" });
             } else {
-                console.log("Execute Payment Response:", payment);
-                // console.log(payment);
-                const response = JSON.stringify(payment);
-                const parsedResponse = JSON.parse(response);
-
-                const transactions = parsedResponse.transactions[0];
-
-                console.log("transactions", transactions);
-
-                console.error("Payment Successfull!")
-
-                return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
-
+              console.log("Execute Payment Response:", payment);
+              return res.status(200).json({ success: true, message: "Payment successful!" });
             }
-        })
-
-
+          });
+        }
+      });
     } catch (error) {
-        console.log("Error in succes endpoint",error);
-        return res.status(500).json({ message: "Payment failed and  Failed at try catch of /success" });
+      console.log("Error in succes endpoint", error);
+      return res.status(500).json({ message: "Payment failed and  Failed at try catch of /success" });
     }
+  });
+// app.get('/', async (req, res) => {
 
-})
+//     try {
+//        const PayerID = req.query.PayerID;
+//        const paymentId = req.query.paymentId;
+
+//         if (!PayerID || !paymentId) {
+//             // Check if query params are missing
+//             alert("Missing query parameters", { PayerID, paymentId });
+//             return res.status(400).json({ success: false, message: "Missing query parameters" });
+//         }
+
+//         const execute_payment_json = {
+//             "payer_id": PayerID,
+//             "transactions": [{
+//                 "amount": {
+//                     "currency": "USD",
+//                     "total": "1.00"
+//                 }
+//             }]
+//         }
+
+
+//          paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+//             if (error) {
+//                 console.error("Error at executing payment",error);
+//                 return res.status(500).json({ success: false, message: "Payment failed because error during Payment" }); //this will send success: false to the FE.
+
+//             } else {
+//                 console.log("Execute Payment Response:", payment);
+//                 // console.log(payment);
+//                 const response = JSON.stringify(payment);
+//                 const parsedResponse = JSON.parse(response);
+
+//                 const transactions = parsedResponse.transactions[0];
+
+//                 console.log("transactions", transactions);
+
+//                 console.error("Payment Successfull!")
+
+//                 return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
+
+//             }
+//         })
+
+
+//     } catch (error) {
+//         console.log("Error in succes endpoint",error);
+//         return res.status(500).json({ message: "Payment failed and  Failed at try catch of /success" });
+//     }
+
+// })
 
 
 app.get('/failed', async (req, res) => {
