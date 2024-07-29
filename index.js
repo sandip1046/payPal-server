@@ -51,7 +51,7 @@ app.get('/payment', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server.vercel.app/",
+                "return_url": "https://pay-pal-server.vercel.app/success",
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
@@ -109,7 +109,7 @@ app.post('/paymentCoupon', async (req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://pay-pal-server.vercel.app/",
+                "return_url": "https://pay-pal-server.vercel.app/success",
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
@@ -153,7 +153,7 @@ app.post('/paymentCoupon', async (req, res) => {
 
 
 
-app.get('/', async (req, res) => {
+app.get('/success', async (req, res) => {
 
     try {
        const PayerID = req.query.PayerID;
@@ -176,7 +176,7 @@ app.get('/', async (req, res) => {
         }
 
 
-        await paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             // if (error) {
             //     console.error("Error at executing payment",error);
             //     return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
