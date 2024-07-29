@@ -177,11 +177,11 @@ app.get('/', async (req, res) => {
 
 
         await paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-            if (error) {
-                console.error("Error at executing payment",error);
-                return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
+            // if (error) {
+            //     console.error("Error at executing payment",error);
+            //     return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
 
-            } else {
+            // } else {
                 console.log("Execute Payment Response:", payment);
                 // console.log(payment);
                 const response = JSON.stringify(payment);
@@ -195,7 +195,7 @@ app.get('/', async (req, res) => {
 
                 return res.status(200).json({ success: true, message: "Payment successful!" });//this will send response to the FE that payment succeed.
 
-            }
+
         })
 
 
