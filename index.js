@@ -55,15 +55,15 @@ app.get('/payment', async (req, res) => {
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
-                // "item_list": {
-                //     "items": [{
-                //         "name": "item",
-                //         "sku": "item",
-                //         "price": "30",
-                //         "currency": "USD",
-                //         "quantity": 1
-                //     }]
-                // },
+                "item_list": {
+                    "items": [{
+                        "name": "item",
+                        "sku": "item",
+                        "price": "30",
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
                 "amount": {
                     "currency": "USD",
                     "total": "30"
@@ -114,15 +114,15 @@ app.post('/paymentCoupon', async (req, res) => {
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
-                // "item_list": {
-                //     "items": [{
-                //         "name": "item",
-                //         "sku": "item",
-                //         "price": price.toFixed(2),
-                //         "currency": "USD",
-                //         "quantity": 1
-                //     }]
-                // },
+                "item_list": {
+                    "items": [{
+                        "name": "item",
+                        "sku": "item",
+                        "price": price.toFixed(2),
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
                 "amount": {
                     "currency": "USD",
                     "total": price.toFixed(2)
@@ -181,7 +181,7 @@ app.get('/', async (req, res) => {
          paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
                 console.error("Error at executing payment",error);
-                return res.status(500).json({ success: false, message: "Payment failed because of payment execute" }); //this will send success: false to the FE.
+                return res.status(500).json({ success: false, message: "Payment failed because error during Payment" }); //this will send success: false to the FE.
 
             } else {
                 console.log("Execute Payment Response:", payment);
