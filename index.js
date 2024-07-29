@@ -184,7 +184,7 @@ app.get('/', async (req, res) => {
               return res.status(500).json({ success: false, message: "Payment failed because error during Payment execute" });
             } else {
               console.log("Execute Payment Response:", payment);
-              return res.status(200).json({ success: true, message: "Payment successful!" });
+              return res.redirect('https://sandip-ed-tech.vercel.app/fullstack')
             }
           });
         }
