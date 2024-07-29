@@ -55,15 +55,15 @@ app.get('/payment', async (req, res) => {
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "item",
-                        "sku": "item",
-                        "price": "30",
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
+                // "item_list": {
+                //     "items": [{
+                //         "name": "item",
+                //         "sku": "item",
+                //         "price": "30",
+                //         "currency": "USD",
+                //         "quantity": 1
+                //     }]
+                // },
                 "amount": {
                     "currency": "USD",
                     "total": "30"
@@ -114,15 +114,15 @@ app.post('/paymentCoupon', async (req, res) => {
                 "cancel_url": "https://pay-pal-server.vercel.app/failed"
             },
             "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "item",
-                        "sku": "item",
-                        "price": price.toFixed(2),
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
+                // "item_list": {
+                //     "items": [{
+                //         "name": "item",
+                //         "sku": "item",
+                //         "price": price.toFixed(2),
+                //         "currency": "USD",
+                //         "quantity": 1
+                //     }]
+                // },
                 "amount": {
                     "currency": "USD",
                     "total": price.toFixed(2)
